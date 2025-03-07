@@ -6,31 +6,43 @@ export default  function App() {
   const [playerScore, setPlayerScore]= useState(0);
   const [pcScore, setPcScore]=useState(0);
   const [result, setResult]=useState("");
-  const options = ["piedra", "papel", "tijeras"];
+  const options = ["Papel","Tijeras","Piedra"];
 
   const playGame= (playerChoice)=>{
+    //Eleccion aleatoria de PC
     const pcChoice = options[Math.floor(Math.random() * options.length)];
+    //Ganador
     const winner = determineWinner(playerChoice, pcChoice);
-  
+    
+    console.log(`Jugador elige ${playerChoice}`);
+    console.log(`PC elige ${pcChoice}`);
+    console.log(`Gano  ${winner}`);
+    console.log(`______`);
+
+    //Combate
     if (winner === "Jugador") {
       setPlayerScore(playerScore + 1);
-      setResult(`Ganaste! ${playerChoice} vence a ${pcChoice}`);
-    } else if (winner === "Computadora") {
+      return setResult(`Jugador Gano!,  ${playerChoice} vence a ${pcChoice}`);
+      
+    } else if (winner === "PC") {
       setPcScore(pcScore + 1);
-      setResult(`Perdiste! ${pcChoice} vence a ${playerChoice}`);
+      return setResult(`Jugador perdio! ${pcChoice} vence a ${playerChoice}`);
+      
     } else {
-      setResult("Es un empate!");
+      return  ("Es un EMPATE");
     }
   };
-  const determineWinner = (player, pc)=>{
+
+  //Determinando Ganador 
+  const determineWinner = (playerChoice, pcChoice) => {
     if(
-      (player === "piedra" && pc === "tijera") ||
-      (player === "Papel" && pc === "Piedra") ||
-      (player === "Tijera" && pc === "Papel")
-    ){
-      return "Jugador";
+      (playerChoice === "Piedra" && pcChoice === "Tijera") ||
+      (playerChoice === "Papel" && pcChoice === "Piedra") ||
+      (playerChoice === "Tijera" && pcChoice === "Papel")
+    ) {
+    return (`Jugador con :${playerChoice}`)
     }
-    return "PC";
+    return (`PC con :${pcChoice}`)
   };
 
   return (
@@ -38,12 +50,12 @@ export default  function App() {
         <h1 className="game-title"> Game Piedra 🪨 Papel 📃 o Tijeras ✂️</h1>
         <div className="marcador">
             <div className="puntaje">
-              <h2>Jugador{playerScore}</h2>
-              <p id="jugador-puntos">0</p>
+              <h2>Jugador {playerScore}</h2>
+              <p id="jugador-puntos"></p>
             </div>
             <div className="puntaje">
-              <h2>PC{pcScore}</h2>
-              <p id="pc-puntos">0</p>
+              <h2>PC {pcScore}</h2>
+              <p id="pc-puntos"></p>
             </div>
           <div/>
         </div>
@@ -54,24 +66,15 @@ export default  function App() {
             <button
             key={option}
             onClick={()=> playGame(option)}
-            style={{ margin: "10px", padding: "10px 20px", fontSize: "16px" }}
+            className="option"
             >
               {option}
             </button>
           ))}
-          <button className="option " id="piedra" > 
-            <span>Piedra</span>
-            </button>
-          <button className="option " id="papel"> 
-            <span>Papel</span>
-            </button>
-          <button className="option " id="tijeras"> 
-            <span>Tijeras</span>
-            </button>
         </div>
 
         <div className="res">
-            <h2>{result}</h2>
+            <h2> {result} </h2>
         </div>
       </div>
     );
