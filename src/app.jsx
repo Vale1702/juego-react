@@ -12,37 +12,41 @@ export default  function App() {
     //Eleccion aleatoria de PC
     const pcChoice = options[Math.floor(Math.random() * options.length)];
     //Ganador
-    const winner = determineWinner(playerChoice, pcChoice);
+    const winner = determineWinner(playerChoice.toLowerCase(), pcChoice.toLowerCase());
     
     console.log(`Jugador elige ${playerChoice}`);
     console.log(`PC elige ${pcChoice}`);
-    console.log(`Gano  ${winner}`);
+    console.log(` Resultado ${winner}`);
     console.log(`______`);
 
     //Combate
-    if (winner === "Jugador") {
-      setPlayerScore(playerScore + 1);
-      return setResult(`Jugador Gano!,  ${playerChoice} vence a ${pcChoice}`);
-      
-    } else if (winner === "PC") {
-      setPcScore(pcScore + 1);
-      return setResult(`Jugador perdio! ${pcChoice} vence a ${playerChoice}`);
-      
-    } else {
-      return  ("Es un EMPATE");
-    }
+   if (winner === "Empate") {
+     setResult("Es un EMPATE!!");
+
+    } else if (winner === "Jugador"){ 
+      setPlayerScore(puntajeActual => puntajeActual + 1)
+      setResult(`Jugador Gana! ${playerChoice} vence a ${pcChoice}`);
+      } 
+      else {
+        setPcScore (puntajeActual => puntajeActual + 1);
+        setResult (`PC Gano! ${pcChoice} vence a ${playerChoice}`)
+      }
   };
 
   //Determinando Ganador 
   const determineWinner = (playerChoice, pcChoice) => {
-    if(
-      (playerChoice === "Piedra" && pcChoice === "Tijera") ||
-      (playerChoice === "Papel" && pcChoice === "Piedra") ||
-      (playerChoice === "Tijera" && pcChoice === "Papel")
-    ) {
-    return (`Jugador con :${playerChoice}`)
+
+    const jugada = {
+      piedra: "tijeras",
+      papel: "piedra",
+      tijeras: "papel"
+    };
+
+    if(playerChoice === pcChoice ){
+      return "Es un Empate";
     }
-    return (`PC con :${pcChoice}`)
+    return jugada[playerChoice] === pcChoice ? "Jugador" : "PC";
+
   };
 
   return (
