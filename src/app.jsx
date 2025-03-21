@@ -1,39 +1,41 @@
+import confetti from 'canvas-confetti'
 import React, { useState } from "react";
-// import React, { useState } from "react";
 import './style.css';
+import { WinnerModal } from "./winnerModal";
 
 export default  function App() {
   const [playerScore, setPlayerScore]= useState(0);
   const [pcScore, setPcScore]=useState(0);
   const [result, setResult]=useState("");
+  const [winner, setWinner] = useState(null);
   const options = ["Papel","Tijeras","Piedra"];
 
-  const playGame= (playerChoice)=>{
-    //Eleccion aleatoria de PC
+console.log("Winner:", winner, );
+
+  const playGame = (playerChoice)=>{
     const pcChoice = options[Math.floor(Math.random() * options.length)];
-    //Ganador
-    const winner = determineWinner(playerChoice.toLowerCase(), pcChoice.toLowerCase());
+
+    const jugada = determineWinner(playerChoice.toLowerCase(), pcChoice.toLowerCase());
+
+   if (jugada === "Empate") {
+      setWinner("Empate");
+     return;
+    } 
     
-    console.log(`Jugador elige ${playerChoice}`);
-    console.log(`PC elige ${pcChoice}`);
-    console.log(` Resultado ${winner}`);
-    console.log(`______`);
-
-    //Combate
-   if (winner === "Empate") {
-     setResult("Es un EMPATE!!");
-
-    } else if (winner === "Jugador"){ 
+    if (jugada === "Jugador"){ 
       setPlayerScore(puntajeActual => puntajeActual + 1)
-      setResult(`Jugador Gana! ${playerChoice} vence a ${pcChoice}`);
-      } 
-      else {
-        setPcScore (puntajeActual => puntajeActual + 1);
-        setResult (`PC Gano! ${pcChoice} vence a ${playerChoice}`)
-      }
+      setResult(`Jugador elige ${playerChoice} vence a ${pcChoice}`);
+      confetti()
+      setWinner(false);
+    } 
+    else {
+      setPcScore (puntajeActual => puntajeActual + 1);
+      setResult (`PC elige ${pcChoice}, vence a ${playerChoice}`)
+      confetti()
+      setWinner(true);
+        }
   };
 
-  //Determinando Ganador 
   const determineWinner = (playerChoice, pcChoice) => {
 
     const jugada = {
@@ -43,44 +45,38 @@ export default  function App() {
     };
 
     if(playerChoice === pcChoice ){
-      return "Es un Empate";
+      return "Empate";
     }
     return jugada[playerChoice] === pcChoice ? "Jugador" : "PC";
-
   };
 
+  //Reiniciar Juego
+  const resetGame = () =>{
+    setResult(null)
+    setWinner(null);
+  }
+
   return (
-      <div className="game-container">
-        <h1 className="game-title"> Game Piedra 🪨 Papel 📃 o Tijeras ✂️</h1>
-        <div className="marcador">
-            <div className="puntaje">
-              <h2>Jugador {playerScore}</h2>
-              <p id="jugador-puntos"></p>
-            </div>
-            <div className="puntaje">
-              <h2>PC {pcScore}</h2>
-              <p id="pc-puntos"></p>
-            </div>
+      <main className="game-container">
+        <h1> Game Piedra 🪨 Papel 📃 o Tijeras ✂️</h1>
+
+        <div className="score-container">
+              <span>Jugador: {playerScore}</span>
+              <span>PC: {pcScore}</span>
           <div/>
         </div>
 
-        <div className="options-container">
           <h2> Elige tu Opcion </h2>
-          {options.map((option)=>(
-            <button
-            key={option}
-            onClick={()=> playGame(option)}
-            className="option"
-            >
-              {option}
-            </button>
-          ))}
-        </div>
+          <button onClick={() => playGame("Papel")}>Papel 📃</button>
+          <button onClick={() => playGame("Tijeras")}>Tijeras ✂️</button>
+          <button onClick={() => playGame("Piedra")}>Piedra 🪨</button>
 
-        <div className="res">
-            <h2> {result} </h2>
-        </div>
-      </div>
+          <p className="result">{result}</p>
+
+          <WinnerModal
+          resetGame={resetGame}
+          winner={winner}/>
+      </main>
     );
 }
 
