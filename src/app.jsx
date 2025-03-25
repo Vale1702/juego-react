@@ -1,38 +1,51 @@
 import confetti from 'canvas-confetti'
 import React, { useState } from "react";
 import './style.css';
-import { WinnerModal } from "./winnerModal";
+import { WinnerModal } from "./components/winnerModal";
 
 export default  function App() {
   const [playerScore, setPlayerScore]= useState(0);
   const [pcScore, setPcScore]=useState(0);
   const [result, setResult]=useState("");
   const [winner, setWinner] = useState(null);
-  const options = ["Papel","Tijeras","Piedra"];
-
-console.log("Winner:", winner, );
-
+  
+  console.log("Winner:", winner, );
+  
   const playGame = (playerChoice)=>{
+    if(playerScore === 3 || pcScore === 3){
+      return console.log( "Fin de partida"); 
+    }
+    
+    const options = ["Papel","Tijeras","Piedra"];
     const pcChoice = options[Math.floor(Math.random() * options.length)];
-
     const jugada = determineWinner(playerChoice.toLowerCase(), pcChoice.toLowerCase());
 
-   if (jugada === "Empate") {
-      setWinner("Empate");
-     return;
-    } 
+    if (jugada === "Empate") {
+       setWinner("Empate");
+      return;
+     }
     
     if (jugada === "Jugador"){ 
-      setPlayerScore(puntajeActual => puntajeActual + 1)
-      setResult(`Jugador elige ${playerChoice} vence a ${pcChoice}`);
-      confetti()
-      setWinner(false);
+      setPlayerScore((puntajeActual) => {
+        const newScore = puntajeActual + 1;
+        if(newScore === 3){
+          setWinner("Jugador");
+          confetti()
+        }
+        return newScore
+      } );
+        setResult(`Jugador elige ${playerChoice} \n PC elige ${pcChoice}`);
     } 
     else {
-      setPcScore (puntajeActual => puntajeActual + 1);
-      setResult (`PC elige ${pcChoice}, vence a ${playerChoice}`)
-      confetti()
-      setWinner(true);
+      setPcScore ((puntajeActual) => {
+        const newScore = puntajeActual + 1;
+        if (newScore === 3){
+          setWinner("PC");
+          confetti()
+        }
+        return newScore;
+      } );
+      setResult (`PC elige ${pcChoice} \n Jugador elige  ${playerChoice}`)
         }
   };
 
@@ -52,6 +65,8 @@ console.log("Winner:", winner, );
 
   //Reiniciar Juego
   const resetGame = () =>{
+    setPlayerScore(0)
+    setPcScore(0);
     setResult(null)
     setWinner(null);
   }
@@ -67,15 +82,20 @@ console.log("Winner:", winner, );
         </div>
 
           <h2> Elige tu Opcion </h2>
-          <button onClick={() => playGame("Papel")}>Papel 📃</button>
-          <button onClick={() => playGame("Tijeras")}>Tijeras ✂️</button>
-          <button onClick={() => playGame("Piedra")}>Piedra 🪨</button>
+          <button onClick={() => playGame("Papel")} disabled={playerScore === 3 || pcScore === 3}>Papel 📃</button>
+          <button onClick={() => playGame("Tijeras")} disabled={playerScore === 3 || pcScore === 3}>Tijeras ✂️</button>
+          <button onClick={() => playGame("Piedra")} disabled={playerScore === 3 || pcScore === 3}>Piedra 🪨</button>
 
           <p className="result">{result}</p>
 
           <WinnerModal
+          winner={winner}
+          setWinner={setWinner}
           resetGame={resetGame}
-          winner={winner}/>
+          />
+          {(playerScore === 3 || pcScore === 3)&&(
+            <button onClick={resetGame}>Nuevo Juego</button>
+          )}
       </main>
     );
 }

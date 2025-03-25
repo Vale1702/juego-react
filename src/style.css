@@ -26,7 +26,7 @@ h1{
 }
 
 button{
-    background-color: #0b7ffc;
+    background-color: #197fecec;
     color: white;
     border: none;
     padding: 12px 20px; 
@@ -38,14 +38,14 @@ button{
 }
 button:hover {
     transform: scale(1.1);
-    background-color:#0056b3;
+    background-color:rgb(15, 212, 8) ;
   }
 
 .result{
     font-size: 1.8rem; 
     font-weight: bold;
     margin-top: 20px;
-    text-shadow: 5px 5px 5px rgb(4 177 250);
+    text-shadow: 1px 5px 5px rgb(4 177 250);
 }
 
 .winner {
@@ -56,7 +56,7 @@ button:hover {
     left: 0;
     display: grid;
     place-items: center;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.5);
   }
   
   .winner .text {
@@ -72,10 +72,15 @@ button:hover {
     gap: 20px;
   }
   
-  .winner .win {
+   .winner .win {
     margin: 0 auto;
-    width: fit-content;
-    border-radius: 10px;
-    display: flex;
-    gap: 15px;
+    border-radius: 10px ;
+    font-weight: 600;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: #197fec86 ;
   }
+  
+  .win:focus{
+  outline-color: rgb(4, 242, 250) ;
+}
