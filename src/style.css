@@ -1,6 +1,7 @@
+/* 
 body {
-    background-color: #2c2c2c;
-    color: white;
+  background-color: #2c2c2c;
+  color: white;
     font-family: 'Poppins', sans-serif;
     text-align: center;
     display: flex;
@@ -15,6 +16,7 @@ h1{
     font-size: 2rem;
     text-transform: uppercase;
     margin-bottom: 10px;
+    color: #111;
 }
 
 .score-container{
@@ -83,4 +85,4 @@ button:hover {
   
   .win:focus{
   outline-color: rgb(4, 242, 250) ;
-}
+} */
