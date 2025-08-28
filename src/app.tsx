@@ -1,6 +1,6 @@
 // import { WinnerModal } from "./components/winnerModal";
 import Container from './components/Container/Container';
-// import PlayGame from './components/PlayGame/PlayGame';
+import PlayGame from './components/PlayGame/PlayGame';
 
 
 const handleClick = ()  => alert("Ya estoy clickeado")
@@ -17,9 +17,10 @@ export default  function App() {
 
   return (
     <>
-    {/* <PlayGame/> */}
-   {/* <WinnerModal/> */}
+    <PlayGame
+    />
     <Container/>
+   {/* <WinnerModal/> */}
     </>
     )
 }
