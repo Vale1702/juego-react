@@ -1,50 +1,153 @@
 import { useState } from "react";
 import confetti from 'canvas-confetti'
+import '../../style.css'
 
 export const options = ["Piedra", "Papel", "Tijeras"] as const;
 
-const PlayGame = (playerChoice : typeof options[number]) =>{
-  const pcChoice = options[Math.floor(Math.random() * options.length)];
-  const [result, setResult]=useState("");
-  const [playerScore, setPlayerScore]= useState(0);
-  const [pcScore, setPcScore]=useState(0);
-
+const usePlayGame = () => {
+  const [result, setResult] = useState("");
+  const [playerScore, setPlayerScore] = useState(0);
+  const [pcScore, setPcScore] = useState(0);
   const [winner, setWinner] = useState("");
-  const jugada = determineWinner(playerChoice, pcChoice);
+  const [pcChoice, setPcChoice] = useState<typeof options[number] | null>(null);
 
-
-  if (jugada === "Empate") {
-     setResult(`Empate: Jugador elige ${playerChoice}, PC elige ${pcChoice}`);
-     return;
-   }
-
-   if (jugada === "Jugador"){ 
-     setPlayerScore((prev) => {
-       const newScore = prev + 1;
-       if(newScore === 3){
-         setWinner("Jugador");
-         confetti();
-       }
-       return newScore;
-     } );
-       setResult(`Jugador elige ${playerChoice},  PC elige ${pcChoice}`);
-   } 
-   else {
-     setPcScore ((prev) => {
-       const newScore = prev + 1;
-       if (newScore === 3){
-         setWinner("PC");
-         confetti();
-       }
-       return newScore;
-     } );
-     setResult (`PC elige ${pcChoice},  Jugador elige  ${playerChoice}`)
-     }
-
-    if(playerScore === 3 || pcScore === 3){
-      return console.log( "Fin de partida"); 
+  const determineWinner = (playerChoice: typeof options[number], pcChoice: typeof options[number]) => {
+    if (playerChoice === pcChoice) {
+      return "Empate";
     }
-
+    
+    // Piedra vence a Tijeras
+    if (playerChoice === "Piedra" && pcChoice === "Tijeras") {
+      return "Jugador";
+    }
+    
+    // Papel vence a Piedra
+    if (playerChoice === "Papel" && pcChoice === "Piedra") {
+      return "Jugador";
+    }
+    
+    // Tijeras vencen a Papel
+    if (playerChoice === "Tijeras" && pcChoice === "Papel") {
+      return "Jugador";
+    }
+    
+    // Si no es empate ni gana el jugador, gana la PC
+    return "PC";
   };
 
-  export default PlayGame;
+  const playGame = (playerChoice: typeof options[number]) => {
+    // Generar elección de la PC
+    const newPcChoice = options[Math.floor(Math.random() * options.length)] as typeof options[number];
+    setPcChoice(newPcChoice);
+    
+    // Determinar ganador
+    const jugada = determineWinner(playerChoice, newPcChoice);
+    
+    if (jugada === "Empate") {
+      setResult(`Empate: Jugador elige ${playerChoice}, PC elige ${newPcChoice}`);
+      return;
+    }
+
+    if (jugada === "Jugador") {
+      setPlayerScore((prev) => {
+        const newScore = prev + 1;
+        if (newScore === 3) {
+          setWinner("Jugador");
+          confetti();
+        }
+        return newScore;
+      });
+      setResult(`¡Ganaste! Jugador elige ${playerChoice}, PC elige ${newPcChoice}`);
+    } else {
+      setPcScore((prev) => {
+        const newScore = prev + 1;
+        if (newScore === 3) {
+          setWinner("PC");
+          confetti();
+        }
+        return newScore;
+      });
+      setResult(`¡Perdiste! PC elige ${newPcChoice}, Jugador elige ${playerChoice}`);
+    }
+  };
+
+  const resetGame = () => {
+    setResult("");
+    setPlayerScore(0);
+    setPcScore(0);
+    setWinner("");
+    setPcChoice(null);
+  };
+
+  return {
+    result,
+    playerScore,
+    pcScore,
+    winner,
+    pcChoice,
+    playGame,
+    resetGame
+  };
+};
+
+const PlayGameComponent = () => {
+  const { result, playerScore, pcScore, winner, pcChoice, playGame, resetGame } = usePlayGame();
+
+  if (winner) {
+    return (
+      <div className="winner-modal">
+        <div className="winner-content">
+          <h2 className="game-title">
+            {winner === "Jugador" ? "¡Felicidades! ¡Ganaste!" : "¡Game Over! Ganó la PC"}
+          </h2>
+          <p className="score-display">Puntuación final: Jugador {playerScore} - PC {pcScore}</p>
+          <button
+            onClick={resetGame}
+            className="winner-button"
+          >
+            Jugar de nuevo
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="game-container">
+      <h1 className="game-title">Piedra, Papel, Tijeras</h1>
+      
+      <div className="score-display">
+        <span>Jugador: {playerScore}</span>
+        <span>PC: {pcScore}</span>
+      </div>
+
+      {result && (
+        <div className="result-display">
+          <p>{result}</p>
+          {pcChoice && <p style={{fontSize: '1rem', marginTop: '10px'}}>PC eligió: {pcChoice}</p>}
+        </div>
+      )}
+
+      <div className="game-buttons">
+        {options.map((option) => (
+          <button
+            key={option}
+            onClick={() => playGame(option)}
+            className="game-button"
+          >
+            {option}
+          </button>
+        ))}
+      </div>
+
+      <button
+        onClick={resetGame}
+        className="reset-button"
+      >
+        Reiniciar
+      </button>
+    </div>
+  );
+};
+
+export default PlayGameComponent;
