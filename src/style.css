@@ -1,20 +1,21 @@
 body {
-    background-color: #2c2c2c;
-    color: white;
-    font-family: 'Poppins', sans-serif;
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-    padding: 0;
+  background-color: #2c2c2c;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  padding: 0;
 }
 
 h1{
     font-size: 2rem;
     text-transform: uppercase;
     margin-bottom: 10px;
+    color: #111;
 }
 
 .score-container{
@@ -26,7 +27,7 @@ h1{
 }
 
 button{
-    background-color: #0b7ffc;
+    background-color: #197fecec;
     color: white;
     border: none;
     padding: 12px 20px; 
@@ -36,16 +37,17 @@ button{
     cursor: pointer;
     transition: transform 0.3s ease, background-color 0.3s ease;
 }
+
 button:hover {
     transform: scale(1.1);
-    background-color:#0056b3;
-  }
+    background-color:rgb(15, 212, 8) ;
+}
 
 .result{
     font-size: 1.8rem; 
     font-weight: bold;
     margin-top: 20px;
-    text-shadow: 5px 5px 5px rgb(4 177 250);
+    text-shadow: 1px 5px 5px rgb(4 177 250);
 }
 
 .winner {
@@ -56,10 +58,10 @@ button:hover {
     left: 0;
     display: grid;
     place-items: center;
-    background-color: rgba(0, 0, 0, 0.7);
-  }
-  
-  .winner .text {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.winner .text {
     background: #111;
     height: 300px;
     width: 320px;
@@ -70,12 +72,141 @@ button:hover {
     justify-content: center;
     align-items: center;
     gap: 20px;
-  }
-  
-  .winner .win {
+}
+
+.winner .win {
     margin: 0 auto;
-    width: fit-content;
+    border-radius: 10px ;
+    font-weight: 600;
+    outline-width: 2px;
+    outline-style: solid;
+    outline-color: #197fec86 ;
+}
+
+.win:focus{
+    outline-color: rgb(4, 242, 250) ;
+}
+
+/* Estilos adicionales para el juego */
+.game-container {
+    background-color: #2c2c2c;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.game-title {
+    font-size: 2rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.score-display {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.result-display {
+    font-size: 1.8rem; 
+    font-weight: bold;
+    margin-top: 20px;
+    text-shadow: 1px 5px 5px rgb(4 177 250);
+    color: white;
+    background-color: rgba(0,0,0,0.3);
+    padding: 15px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+.game-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.game-button {
+    background-color: #197fecec;
+    color: white;
+    border: none;
+    padding: 12px 20px; 
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.game-button:hover {
+    transform: scale(1.1);
+    background-color: rgb(15, 212, 8);
+}
+
+.reset-button {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 12px 20px; 
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.reset-button:hover {
+    transform: scale(1.1);
+    background-color: #c0392b;
+}
+
+.winner-modal {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    display: grid;
+    place-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    z-index: 1000;
+}
+
+.winner-content {
+    background: #111;
+    height: 300px;
+    width: 320px;
+    border: 2px solid #eee;
     border-radius: 10px;
     display: flex;
-    gap: 15px;
-  }
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    color: white;
+}
+
+.winner-button {
+    background-color: #197fecec;
+    color: white;
+    border: none;
+    padding: 12px 20px; 
+    border-radius: 10px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.winner-button:hover {
+    transform: scale(1.1);
+    background-color: rgb(15, 212, 8);
+}
