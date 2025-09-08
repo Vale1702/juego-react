@@ -53,7 +53,6 @@ const usePlayGame = () => {
         const newScore = prev + 1;
         if (newScore === 3) {
           setWinner("Jugador");
-          confetti();
         }
         return newScore;
       });
@@ -63,13 +62,12 @@ const usePlayGame = () => {
         const newScore = prev + 1;
         if (newScore === 3) {
           setWinner("PC");
-          confetti();
         }
         return newScore;
       });
       setResult(`¡Perdiste! PC elige ${newPcChoice}, Jugador elige ${playerChoice}`);
-    }
-  };
+    };
+  }
 
   const resetGame = () => {
     setResult("");
@@ -95,21 +93,26 @@ const PlayGameComponent = () => {
 
   if (winner) {
     return (
+        confetti(),
       <div className="winner-modal">
         <div className="winner-content">
           <h2 className="game-title">
             {winner === "Jugador" ? "¡Felicidades! ¡Ganaste!" : "¡Game Over! Ganó la PC"}
           </h2>
-          <p className="score-display">Puntuación final: Jugador {playerScore} - PC {pcScore}</p>
+          <div className="score-display">
+            Puntuación final
+            <p>Jugador: {playerScore} </p>
+            <p>PC: {pcScore}</p>
+            </div>
           <button
             onClick={resetGame}
             className="winner-button"
-          >
+            >
             Jugar de nuevo
           </button>
         </div>
       </div>
-    );
+      );
   }
 
   return (
@@ -118,22 +121,24 @@ const PlayGameComponent = () => {
       
       <div className="score-display">
         <span>Jugador: {playerScore}</span>
-        <span>PC: {pcScore}</span>
+        <span> PC: {pcScore}</span>
       </div>
 
       {result && (
         <div className="result-display">
           <p>{result}</p>
-          {pcChoice && <p style={{fontSize: '1rem', marginTop: '10px'}}>PC eligió: {pcChoice}</p>}
+          {pcChoice && <p style={{fontSize: '1rem', marginTop: '10px'}}>
+          </p>
+          }
         </div>
       )}
 
       <div className="game-buttons">
         {options.map((option) => (
           <button
-            key={option}
-            onClick={() => playGame(option)}
-            className="game-button"
+          key={option}
+          onClick={() => playGame(option)}
+          className="game-button"
           >
             {option}
           </button>

@@ -110,7 +110,7 @@ button:hover {
 }
 
 .score-display {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     gap: 20px;
     font-size: 1.5rem;
@@ -183,7 +183,7 @@ button:hover {
 
 .winner-content {
     background: #111;
-    height: 300px;
+    height: 360px;
     width: 320px;
     border: 2px solid #eee;
     border-radius: 10px;
