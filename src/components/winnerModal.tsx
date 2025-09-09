@@ -1,26 +1,42 @@
-export function WinnerModal ({winner, setWinner, resetGame}){
-    if (!winner ) return null
+import confetti from "canvas-confetti";
 
-    const winnerText = winner === "Empate" 
+export function WinnerModal ({winner, setWinner, resetGame, playerScore,pcScore}: any){
+    if (winner) {
+        confetti();
+    }
+    const winnerText = 
+    winner === "Empate" 
     ? "¡Es un EMPATE! 🙌  ¡Sigue jugando!" 
     :  winner === "Jugador" 
-    ? "¡Jugador Gana 🏆!" 
-    : "¡PC Gana 🤖!";
+    ? "¡Felicidades, Ganó Jugador 🏆!" 
+    : "¡Game Over! Ganó la PC 🤖";
 
     // Cierra el modal solo si se hace clic fuera del contenido
-    const handleClose = (e) => {
+    const handleClose = (e:any) => {
         if (e.target.classList.contains("winner")) {
             setWinner(null); // Cierra el modal sin reiniciar el juego
         }
     };
 
     return(
-        <section className="winner" onClick={handleClose}>
-            <div className="text">
-                <h2> {winnerText}</h2> 
+        <div className="winner-modal" onClick={handleClose}>
+            <div className="winner-content">
+                <h2 className="game-title"> {winnerText}</h2> 
+
+                {winner !==  "Empate" &&(
+                    <div className="score-display">
+                        Puntuación Final
+                        <p>Jugador: {playerScore} </p>
+                        <p>PC: {pcScore}</p>
+                    </div>
+                )}
+
                 {winner !== "Empate" && (
-                    <button onClick={resetGame} className="win">Nuevo Juego</button>)}
+                    <button onClick={resetGame} className="winner-button">
+                        Juego nuevo
+                    </button>
+                )}
             </div>
-        </section>
-    )
+        </div>
+    );
 }
