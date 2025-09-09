@@ -5,14 +5,6 @@ const handleClick = ()  => alert("Ya estoy clickeado")
 
 export default  function App() {
 
-  //Reiniciar Juego
-  // const resetGame = () =>{
-  //   setPlayerScore(0)
-  //   setPcScore(0);
-  //   setResult(null)
-  //   setWinner(null);
-  // }
-
   return (
     <>
       <PlayGameComponent />
