@@ -8,6 +8,9 @@ El sistema genera una elección aleatoria para la PC y determina el resultado de
 
 Este proyecto fue inicialmente creado en JavaScript y posteriormente migrado a TypeScript, mejorando el tipado, la escalabilidad y el mantenimiento del código.
 
+🔗 **Demo:** https://juego-react-rho.vercel.app/
+💻 **Repositorio:** https://github.com/Vale1702/juego-react
+
 ## 🌟 Funcionalidades
 - 🎮 Juego contra la computadora (selección aleatoria)
 - ⚡ Actualización de resultados en tiempo real
@@ -24,6 +27,9 @@ Este proyecto fue inicialmente creado en JavaScript y posteriormente migrado a T
 ## Vista Previa
 
 ![Juego](./src/assets/juego.png)
+![Juego](./src/assets/juego-preview1.png)
+![Juego](./src/assets/juego-preview2.png)
+![Juego](./src/assets/juego-preview3.png)
 
 ## 🚀 Instalación y uso
 1 Clona el repositorio:
@@ -51,3 +57,10 @@ Este proyecto fue inicialmente creado en JavaScript y posteriormente migrado a T
 - 🎨 Animaciones en las elecciones
 - 🌐 Modo multijugador
 - 📱 Mejoras en diseño responsive
+
+
+## 🤝 Colaboración
+
+Durante el desarrollo, el proyecto fue mejorado con aportaciones externas. Agradecimiento especial a:
+
+- [@RasetzML](https://github.com/RasetzML)
