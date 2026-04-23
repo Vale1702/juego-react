@@ -1,6 +1,6 @@
 import { useState } from "react";
-import confetti from 'canvas-confetti'
 import '../../style.css'
+import { WinnerModal } from "../winnerModal";
 
 export const options = ["Piedra", "Papel", "Tijeras"] as const;
 
@@ -89,30 +89,18 @@ const usePlayGame = () => {
 };
 
 const PlayGameComponent = () => {
-  const { result, playerScore, pcScore, winner, pcChoice, playGame, resetGame } = usePlayGame();
+  const { result, playerScore, pcScore, winner, pcChoice, playGame, resetGame, setWinner}:any = usePlayGame();
 
   if (winner) {
     return (
-        confetti(),
-      <div className="winner-modal">
-        <div className="winner-content">
-          <h2 className="game-title">
-            {winner === "Jugador" ? "¡Felicidades! ¡Ganaste!" : "¡Game Over! Ganó la PC"}
-          </h2>
-          <div className="score-display">
-            Puntuación final
-            <p>Jugador: {playerScore} </p>
-            <p>PC: {pcScore}</p>
-            </div>
-          <button
-            onClick={resetGame}
-            className="winner-button"
-            >
-            Jugar de nuevo
-          </button>
-        </div>
-      </div>
-      );
+      <WinnerModal
+      winner={winner} 
+      setWinner={setWinner} 
+      resetGame={resetGame} 
+      playerScore={playerScore} 
+      pcScore={pcScore}
+      />
+      )
   }
 
   return (
