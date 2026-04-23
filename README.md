@@ -1,7 +1,19 @@
 # Juego Piedra Papel o Tijeras
 
 ## 📌 Descripción
-Este proyecto es un juego interactivo de Piedra, Papel o Tijera desarrollado con React. El usuario puede elegir una opción, el segundo jugador está definido como PC, es decir juegas contra tu ordenador, este hace una selección aleatoriamente. El marcador se actualiza en tiempo real mostrando un puntaje acumulado, al llegar a la tercera partida ganada se abre un modal indicando al ganador final. 
+
+Aplicación web interactiva desarrollada con React + TypeScript, donde el usuario juega contra la computadora en el clásico juego de Piedra, Papel o Tijera.
+
+El sistema genera una elección aleatoria para la PC y determina el resultado de cada ronda en tiempo real. El marcador se actualiza automáticamente y, al alcanzar 3 victorias, se muestra un modal anunciando al ganador final.
+
+Este proyecto fue inicialmente creado en JavaScript y posteriormente migrado a TypeScript, mejorando el tipado, la escalabilidad y el mantenimiento del código.
+
+## 🌟 Funcionalidades
+- 🎮 Juego contra la computadora (selección aleatoria)
+- ⚡ Actualización de resultados en tiempo real
+- 🧮 Marcador acumulativo
+- 🏆 Modal de ganador al llegar a 3 victorias
+- 🔄 Migración de JavaScript a TypeScript
 
 ## 🛠️ Tecnologías utilizadas
 - React
@@ -9,20 +21,33 @@ Este proyecto es un juego interactivo de Piedra, Papel o Tijera desarrollado con
 - CSS
 - HTML
 
-## 🚀 Instalación
-Clona el repositorio:
+## Vista Previa
 
-git clone https://github.com/Vale1702/juego-react.git
-- cd juego-react
+![Juego](./src/assets/juego.png)
 
-Instala las dependencias:
-- npm install
-
-Inicia el servidor de desarrollo:
-- npm start
+## 🚀 Instalación y uso
+1 Clona el repositorio:
+    git clone https://github.com/Vale1702/juego-react.git
+    
+    cd juego-react
+2 Instala las dependencias:
+    npm install
+3 Inicia el proyecto:
+    npm run dev
+4 Abre en tu navegador:
+    http://localhost:5173
 
 ## 🎮 Cómo jugar
-- Haz clic en una de las opciones: piedra, papel o tijera.
-- El sistema mostrará la elección de la computadora.
-- Se mostrará el resultado de la ronda (ganas, pierdes o empatas).
+- Selecciona una opción: Piedra, Papel o Tijera.
+- La computadora elegirá una opción aleatoria.
+- Se mostrará el resultado de la ronda:
+    - ✅ Ganas
+    - ❌ Pierdes
+    - ➖ Empate
 - El marcador se actualizará automáticamente.
+- El primero en llegar a 3 victorias gana la partida.
+
+## 📈 Mejoras futuras
+🎨 Animaciones en las elecciones
+🌐 Modo multijugador
+📱 Mejoras en diseño responsive
