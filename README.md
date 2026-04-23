@@ -8,8 +8,9 @@ El sistema genera una elección aleatoria para la PC y determina el resultado de
 
 Este proyecto fue inicialmente creado en JavaScript y posteriormente migrado a TypeScript, mejorando el tipado, la escalabilidad y el mantenimiento del código.
 
-🔗 **Demo:** https://juego-react-rho.vercel.app/
-💻 **Repositorio:** https://github.com/Vale1702/juego-react
+-🔗 **Demo:** https://juego-react-rho.vercel.app/
+
+-💻 **Repositorio:** https://github.com/Vale1702/juego-react
 
 ## 🌟 Funcionalidades
 - 🎮 Juego contra la computadora (selección aleatoria)
