@@ -48,6 +48,6 @@ Este proyecto fue inicialmente creado en JavaScript y posteriormente migrado a T
 - El primero en llegar a 3 victorias gana la partida.
 
 ## 📈 Mejoras futuras
-🎨 Animaciones en las elecciones
-🌐 Modo multijugador
-📱 Mejoras en diseño responsive
+- 🎨 Animaciones en las elecciones
+- 🌐 Modo multijugador
+- 📱 Mejoras en diseño responsive
